@@ -43,10 +43,9 @@ rewrite_file() {
   local file="$1"
   local name="$2"
 
-  local name_camel=$(to_camel_case "$name")
-  local name_pascal=$(to_pascal_case "$name")
-  local name_kebab=$(to_kebab_case "$name")
-  local name_no_case=$(to_no_case "$name")
+
+
+
 
   cat $file \
     | sed "s/hello-world/$name_kebab/g" \
@@ -71,8 +70,10 @@ if  ! echo -n "$name" |  grep -qE '^[a-z]+(-[a-z]+)*$' ;then
  exit 1
 fi
 
+name_camel=$(to_camel_case "$name")
+name_pascal=$(to_pascal_case "$name")
 name_kebab=$(to_kebab_case "$name")
-
+name_no_case=$(to_no_case "$name")
 
 new_component_folder="$name_kebab"
 mkdir -p $new_component_folder
