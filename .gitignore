@@ -1,1 +1,3 @@
-templates/hello-world/.git
+templates/hello-world/.git_folder
+node_modules
+templates

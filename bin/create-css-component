@@ -78,7 +78,7 @@ new_component_folder="$name_kebab"
 mkdir -p $new_component_folder
 # mv ./templates/hello-world/ "$new_component_folder"
 
-for original_filepath in $(find $TEMPLATE_DIR/hello-world -type f | grep -v '/.git/' ); do
+for original_filepath in $(find $TEMPLATE_DIR/hello-world -type f | grep -v '/.git_folder/' ); do
   new_file_path=$(rename_file "$original_filepath")
   mkdir -p $(dirname $new_file_path)
   rewrite_file "$original_filepath" "$name" > $new_file_path
