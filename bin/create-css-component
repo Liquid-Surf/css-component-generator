@@ -107,9 +107,6 @@ new_component_folder="$name_kebab"
 mkdir -p $new_component_folder
 # mv ./templates/hello-world/ "$new_component_folder"
 
-echo $TEMPLATE_TARGET
-echo $new_component_folder
-echo "templates/${TEMPLATE_TARGET}"
 
 # exit 0
 for original_filepath in $(find $TEMPLATE_DIR/${TEMPLATE_TARGET} -type f | grep -v '/.git_folder/' ); do
