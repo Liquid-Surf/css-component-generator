@@ -32,7 +32,7 @@ rename_file() {
   local original_name="$1"
   echo $(echo $original_name \
     | sed "s%$TEMPLATE_DIR%.%" \
-    | sed "s%templates/hello-world%$new_component_folder%" \
+    | sed "s%${TEMPLATE_TARGET}%$new_component_folder%" \
     | sed "s/hello-world/$name_kebab/g" \
     | sed "s/HelloWorld/$name_pascal/g" \
     | sed "s/helloWorld/$name_camel/g"  \
@@ -42,10 +42,6 @@ rename_file() {
 rewrite_file() {
   local file="$1"
   local name="$2"
-
-
-
-
 
   cat $file \
     | sed "s/hello-world/$name_kebab/g" \
@@ -58,7 +54,39 @@ rewrite_file() {
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 TEMPLATE_DIR="$SCRIPT_DIR/../templates"
 
-name="$1"
+
+# parse args
+POSITIONAL=""
+while [[ $# -gt 0 ]]
+do
+key="$1"
+case $key in
+
+    -t|--template)
+    TEMPLATE_TARGET="$2"
+    shift 
+    shift 
+    ;;
+
+
+    *)    
+    POSITIONAL+="$1 "
+    shift 
+    ;;
+
+esac
+done
+
+name="$( echo $POSITIONAL | xargs)" # using xargs to trim the string
+if [ -z "$TEMPLATE_TARGET" ];then
+  TEMPLATE_TARGET="hello-world"
+else
+  TEMPLATE_TARGET="hello-world-${TEMPLATE_TARGET}"
+fi
+echo name ">${name}<"
+
+echo tmp ">${TEMPLATE_TARGET}<"
+
 
 if [ -z "$name" ];then
   echo "you must provide a module name as a first parameter"
@@ -79,12 +107,17 @@ new_component_folder="$name_kebab"
 mkdir -p $new_component_folder
 # mv ./templates/hello-world/ "$new_component_folder"
 
-for original_filepath in $(find $TEMPLATE_DIR/hello-world -type f | grep -v '/.git_folder/' ); do
+echo $TEMPLATE_TARGET
+echo $new_component_folder
+echo "templates/${TEMPLATE_TARGET}"
+
+# exit 0
+for original_filepath in $(find $TEMPLATE_DIR/${TEMPLATE_TARGET} -type f | grep -v '/.git_folder/' ); do
   new_file_path=$(rename_file "$original_filepath")
   mkdir -p $(dirname $new_file_path)
+  # echo $original_filepath to $new_file_path
   rewrite_file "$original_filepath" "$name" > $new_file_path
 done
-
 
 
 
