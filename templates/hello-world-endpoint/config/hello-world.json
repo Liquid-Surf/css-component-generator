@@ -1,19 +1,33 @@
 {
   "@context": [
-    	"https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
-      "https://linkedsoftwaredependencies.org/bundles/npm/hello-world-module/^7.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/hello-world-module/^7.0.0/components/context.jsonld"
   ],
   "@graph": [
     {
       "@id": "urn:my-hello-world:default:HelloWorldHandler",
-      "@type": "RouterHandler",    
-      "baseUrl": { "@id": "urn:solid-server:default:variable:baseUrl" },
-      "targetExtractor": { "@id": "urn:solid-server:default:TargetExtractor" },
-      "allowedPathNames": [ "/hello-world" ],
+      "@type": "RouterHandler",
+      "baseUrl": {
+        "@id": "urn:solid-server:default:variable:baseUrl"
+      },
+      "targetExtractor": {
+        "@id": "urn:solid-server:default:TargetExtractor"
+      },
+      "allowedPathNames": [
+        "/hello-world"
+      ],
       "handler": {
         "@type": "HelloWorldHttpHandler",
       }
+    },
+    {
+      "@id": "urn:solid-server:default:BaseHttpHandler",
+      "@type": "WaterfallHandler",
+      "handlers": [
+        {
+          "@id": "urn:my-hello-world:default:HelloWorldHandler"
+        }
+      ]
     }
   ]
 }
-
