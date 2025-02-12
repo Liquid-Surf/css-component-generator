@@ -9,6 +9,12 @@ import { HttpHandler } from '@solid/community-server';
 
 export class HelloWorldHttpHandler extends HttpHandler {
   protected readonly logger = getLoggerFor(this);
+  private readonly defaultName
+
+  constructor(defaultName: string){
+    super();
+    this.defaultName = defaultName;
+  }
 
   public async handle({ request, response }: HttpHandlerInput): Promise<void> {
 
@@ -27,7 +33,7 @@ export class HelloWorldHttpHandler extends HttpHandler {
     //}
 
 
-		const who = name ? name : "world !";
+		const who = name ? name : this.defaultName;
 
 
 		// json repsonse:

@@ -18,6 +18,7 @@
       ],
       "handler": {
         "@type": "HelloWorldHttpHandler",
+        "defaultName": "world !"
       }
     },
     {
