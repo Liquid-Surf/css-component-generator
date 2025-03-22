@@ -1,27 +1,28 @@
-# CSS component generator
+# CSS Component Generator
 
-Based on CSS' Hello World example component, this repo allow to generate a CSS component. Basically, I was tired of renaming all the 'hello world' variable in the component example, so I created a script to automate this process. 
+A command-line tool to quickly generate CSS components from templates. 
+Instead manually copying and renaming the helloWorld example components - this tool automates the process for you. Comes with ready-to-use templates for common patterns.
 
-# Usage
+It can ether be use a tool to scaffold code, but also as documentation on CSS by exploring the ./templates folder.
 
-Add the following to your shell config ( .bashrc, .zshrc .. )
-`export PATH="$PATH:/path/to/css-component-generator/bin"`
+## Features
 
-Then, reload your shell and run : 
+- Generate components from pre-built templates:
+- Interactive prompts to customize component names
 
-`create-css-component my-component-name`
+## Future Features
 
-# TODOs
+- [ ] More precise renaming ( component name, class name, endpoint name ..) from the cli
+- [ ] add options for template ( add tests, doc etc..)
 
- - replace bash script to js script
-   - convert bash to  zx
-   - use commander to parse args  ( --template ) 
-   - use inquirer 
-     - ask for component name
-     - select template
-     - add tests or not
- - refactor template and script to use placeholder instead of `hello world`s
-   - ask for each placeholder with inquier ( module name, class name etc..)
- - add more templates
-   - API endpoint 
-   - html template 
+## Installation
+
+### from source
+
+1. Clone this repository
+2. `npm ci`
+3. `sudo npm link` this will create 
+
+### from npm 
+
+TODO
