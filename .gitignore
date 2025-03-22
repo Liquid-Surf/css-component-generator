@@ -1,3 +1,4 @@
-templates/hello-world/.git_folder
 node_modules
-templates
+templates/*/.git
+.vscode
+notes
