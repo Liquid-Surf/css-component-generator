@@ -2,6 +2,10 @@ import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { jest } from '@jest/globals';
+// Mock inquirer so its prompt doesn't run and hang during tests
+jest.mock('inquirer', () => ({
+  prompt: () => Promise.resolve({ templateName: 'template1', componentName: 'my-component' })
+}));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -125,4 +129,4 @@ describe('CLI Functions', () => {
             expect(content).toContain('my_test_component');
         });
     });
-}); 
+});

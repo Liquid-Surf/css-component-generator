@@ -58,11 +58,7 @@ export function scaffoldComponent(templateName, componentName, options = {}) {
                     const destinationValue = caseVariations[caseType];
                     const placeholder = TEMPLATE_PLACEHOLDERS[caseType];
                     const placeholderRegex = new RegExp(placeholder, 'g');
-                    console.log("content")
-                    console.log(placeholderRegex, destinationValue)
                     content = content.replace(placeholderRegex, destinationValue);
-                    console.log("file")
-                    console.log(placeholderRegex, destinationValue)
                     newFileName = newFileName.replace(placeholderRegex, destinationValue);
                 });
 
@@ -77,22 +73,25 @@ export function scaffoldComponent(templateName, componentName, options = {}) {
     processDirectory(targetDir);
 }
 
-const templates = getTemplates();
+const currentFileRealPath = fs.realpathSync(fileURLToPath(import.meta.url));
+if (process.argv[1] && fs.realpathSync(process.argv[1]) === currentFileRealPath) {
+    const templates = getTemplates();
 
-inquirer.prompt([
-    {
-        type: 'input',
-        name: 'componentName',
-        message: 'Enter the component name (in kebab-case):',
-        validate: input => isKebabCase(input) ? true : 'Component name must be in kebab-case (e.g., my-component-name).'
-    },
-    {
-        type: 'list',
-        name: 'templateName',
-        message: 'Select a template:',
-        choices: templates
-    }
-]).then(answers => {
-    scaffoldComponent(answers.templateName, answers.componentName);
-    console.log(`Component '${answers.componentName}' has been created using the '${answers.templateName}' template.`);
-});
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'componentName',
+            message: 'Enter the component name (in kebab-case):',
+            validate: input => isKebabCase(input) ? true : 'Component name must be in kebab-case (e.g., my-component-name).'
+        },
+        {
+            type: 'list',
+            name: 'templateName',
+            message: 'Select a template:',
+            choices: templates
+        }
+    ]).then(answers => {
+        scaffoldComponent(answers.templateName, answers.componentName);
+        console.log(`Component '${answers.componentName}' has been created using the '${answers.templateName}' template.`);
+    });
+}
