@@ -1,0 +1,52 @@
+{
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/template-name-module/^7.0.0/components/context.jsonld"
+  ],
+  "@graph": [
+    {"comment": ["use this one if you want you want to handle the endpoint",
+                 "at a precise moment in the middleware sequence handler"]}
+    {
+      "@id": "urn:my-template-name:default:TemplateNameHandler",
+      "@type": "RouterHandler",
+      "baseUrl": {
+        "@id": "urn:solid-server:default:variable:baseUrl"
+      },
+      "targetExtractor": {
+        "@id": "urn:solid-server:default:TargetExtractor"
+      },
+      "allowedPathNames": [
+        "/template-name"
+      ],
+      "handler": {
+        "@type": "TemplateNameHttpHandler"
+      }
+    },
+		{
+
+      "@id": "urn:my-template-name:default:HttpHandlerOverride",
+      "@type": "Override",
+      "overrideInstance": { "@id": "urn:solid-server:default:HttpHandler" },
+      "overrideParameters": {
+        "@type": "SequenceHandler",
+        "handlers": [
+        { "@id": "urn:solid-server:default:Middleware" },
+        {
+          "@id": "urn:solid-server:default:BaseHttpHandler",
+          "@type": "WaterfallHandler",
+          "handlers": [
+            { "@id": "urn:my-template-name:default:TemplateNameHandler" },
+
+            { "@id": "urn:solid-server:default:StaticAssetHandler" },
+            { "@id": "urn:solid-server:default:OidcHandler" },
+            { "@id": "urn:solid-server:default:NotificationHttpHandler" },
+            { "@id": "urn:solid-server:default:StorageDescriptionHandler" },
+            { "@id": "urn:solid-server:default:AuthResourceHttpHandler" },
+            { "@id": "urn:solid-server:default:IdentityProviderHandler" },
+            { "@id": "urn:solid-server:default:LdpHandler" }
+          ]
+        }
+      ]
+      }
+  ]
+}

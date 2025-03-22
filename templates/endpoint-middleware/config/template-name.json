@@ -1,0 +1,34 @@
+{
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/template-name-module/^7.0.0/components/context.jsonld"
+  ],
+  "@graph": [
+    {
+      "@id": "urn:my-template-name:default:TemplateNameHandler",
+      "@type": "RouterHandler",
+      "baseUrl": {
+        "@id": "urn:solid-server:default:variable:baseUrl"
+      },
+      "targetExtractor": {
+        "@id": "urn:solid-server:default:TargetExtractor"
+      },
+      "allowedPathNames": [
+        "/template-name"
+      ],
+      "handler": {
+        "@type": "TemplateNameHttpHandler",
+        "defaultName": "world !"
+      }
+    },
+    {
+      "@id": "urn:solid-server:default:BaseHttpHandler",
+      "@type": "WaterfallHandler",
+      "handlers": [
+        {
+          "@id": "urn:my-template-name:default:TemplateNameHandler"
+        }
+      ]
+    }
+  ]
+}
