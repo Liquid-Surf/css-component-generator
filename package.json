@@ -7,14 +7,44 @@
     "css-component-generator": "./bin/cli.mjs"
   },
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "jest",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "publish:patch": "npm version patch && npm publish",
+    "publish:minor": "npm version minor && npm publish",
+    "publish:major": "npm version major && npm publish"
   },
+  "keywords": [
+    "cli",
+    "css",
+    "Community Solid Server",
+    "solid",
+    "component",
+    "generator",
+    "template"
+  ],
+  "author": "thhck",
+  "license": "MIT",
   "dependencies": {
-    "inquirer": "^8.2.5",
-    "fs-extra": "^11.2.0"
+    "fs-extra": "^11.2.0",
+    "inquirer": "^8.2.5"
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "jest-environment-node": "^29.7.0"
-  }
+    "jest-environment-node": "^29.7.0",
+    "node-fetch": "^3.3.2"
+  },
+  "files": [
+    "bin",
+    "templates"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liquid-surf/css-component-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liquid-surf/css-component-generator/issues"
+  },
+  "homepage": "https://github.com/liquid-surf/css-component-generator#readme"
 }
