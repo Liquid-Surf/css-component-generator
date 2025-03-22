@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import inquirer from 'inquirer';
 import { fileURLToPath } from 'url';
+import { TEMPLATE_PLACEHOLDERS } from './config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,36 +42,28 @@ export function scaffoldComponent(templateName, componentName, options = {}) {
 
     function processDirectory(dir) {
         const items = fs.readdirSync(dir);
-
+        
         items.forEach(item => {
             const fullPath = path.join(dir, item);
             const stats = fs.statSync(fullPath);
-
+            
             if (stats.isDirectory()) {
                 processDirectory(fullPath);
             } else {
                 let content = fs.readFileSync(fullPath, 'utf-8');
                 let newFileName = item;
 
-                Object.entries(caseVariations).forEach(([caseType, caseValue]) => {
-                    let placeholder;
-                    switch (caseType) {
-                        case 'pascalCase':
-                            placeholder = 'TemplateName';
-                            break;
-                        case 'camelCase':
-                            placeholder = 'templateName';
-                            break;
-                        case 'snakeCase':
-                            placeholder = 'template_name';
-                            break;
-                        default:
-                            placeholder = 'template-name';
-                    }
-
+                // Replace source patterns with destination patterns
+                Object.entries(caseVariations).forEach(([caseType, sourceValue]) => {
+                    const destinationValue = caseVariations[caseType];
+                    const placeholder = TEMPLATE_PLACEHOLDERS[caseType];
                     const placeholderRegex = new RegExp(placeholder, 'g');
-                    content = content.replace(placeholderRegex, caseValue);
-                    newFileName = newFileName.replace(placeholderRegex, caseValue);
+                    console.log("content")
+                    console.log(placeholderRegex, destinationValue)
+                    content = content.replace(placeholderRegex, destinationValue);
+                    console.log("file")
+                    console.log(placeholderRegex, destinationValue)
+                    newFileName = newFileName.replace(placeholderRegex, destinationValue);
                 });
 
                 fs.writeFileSync(fullPath, content, 'utf-8');
@@ -83,10 +76,6 @@ export function scaffoldComponent(templateName, componentName, options = {}) {
 
     processDirectory(targetDir);
 }
-console.log("ok")
-// Only run the CLI if this file is being run directly
-console.log(process.argv[1])
-console.log(fileURLToPath(import.meta.url))
 
 const templates = getTemplates();
 
