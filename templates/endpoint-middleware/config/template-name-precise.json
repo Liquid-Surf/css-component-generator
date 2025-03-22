@@ -16,7 +16,7 @@
         "@id": "urn:solid-server:default:TargetExtractor"
       },
       "allowedPathNames": [
-        "/template-name"
+        "^/template-name$"
       ],
       "handler": {
         "@type": "TemplateNameHttpHandler"
