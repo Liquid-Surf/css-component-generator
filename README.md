@@ -4,9 +4,23 @@ A CLI tool to generate CSS components from templates.
 
 ## Installation
 
+### global
+
+You may have to run this with `sudo`
 ```bash
 npm install -g css-component-generator
 ```
+
+### local
+
+```
+git clone https://github.com/liquid-surf/css-component-generator
+cd css-component-generator
+npm ci
+node ./bin/cli.mjs
+```
+
+
 
 ## Usage
 
