@@ -1,17 +1,18 @@
 # description
 
- add a login methods where a math question
- is asked to login
+ add a login methods where secret code is asked to login
 
 
 # usage
 
+```
  npm i
  npm build
  npm run start
+```
 
 
 
-# todo
+# test
 
- - add test
+`npm run test`
