@@ -1,0 +1,10 @@
+{
+  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/template-name-module/^7.0.0/components/context.jsonld",
+  "@graph": [
+    {
+      "comment": "A complete Hello World instance",
+      "@type": "TemplateName",
+      "@id": "urn:my-template-name:core:TemplateName"
+    }
+  ]
+}
