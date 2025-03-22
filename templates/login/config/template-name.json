@@ -1,0 +1,115 @@
+{
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/template-name-module/^7.0.0/components/context.jsonld"
+  ],
+  "@graph": [
+    {
+      "comment": "Handles the template-name login interaction.",
+      "@id": "urn:my-template-name:default:TemplateNameRouter",
+      "@type": "InteractionRouteHandler",
+      "route": {
+        "@id": "urn:my-template-name:default:TemplateNameRoute",
+        "@type": "RelativePathInteractionRoute",
+        "base": {
+          "@id": "urn:solid-server:default:LoginRoute"
+        },
+        "relativePath": "template-name/"
+      },
+      "source": {
+        "@type": "ViewInteractionHandler",
+        "source": {
+          "@id": "urn:my-template-name:default:CreateTemplateNameHandler",
+          "@type": "TemplateNameLoginHandler",
+          "accountStore": {
+            "@id": "urn:solid-server:default:AccountStore"
+          },
+          "passwordStore": {
+            "@id": "urn:solid-server:default:PasswordStore"
+          },
+          "cookieStore": {
+            "@id": "urn:solid-server:default:CookieStore"
+          }
+        }
+      }
+    },
+    {
+      "@id": "urn:solid-server:default:InteractionRouteHandler",
+      "@type": "WaterfallHandler",
+      "handlers": [
+        {
+          "@id": "urn:my-template-name:default:TemplateNameRouter"
+        }
+      ]
+    },
+    {
+      "comment": "Adding the math login to the main controls",
+      "@id": "urn:solid-server:default:ControlHandler",
+      "@type": "ControlHandler",
+      "controls": [
+        {
+          "ControlHandler:_controls_key": "templateName",
+          "ControlHandler:_controls_value": {
+            "@type": "ControlHandler",
+            "controls": [
+              {
+                "ControlHandler:_controls_key": "login",
+                "ControlHandler:_controls_value": {
+                  "@id": "urn:my-template-name:default:TemplateNameRoute"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "comment": "Adding a new login method, list it in .account/login",
+      "@id": "urn:solid-server:default:LoginHandler",
+      "@type": "ControlHandler",
+      "controls": [
+        {
+          "ControlHandler:_controls_key": "Login with templateName",
+          "ControlHandler:_controls_value": {
+            "@id": "urn:my-template-name:default:TemplateNameRoute"
+          }
+        }
+      ]
+    },
+    {
+      "comment": "Adding template-name html view to the html controls",
+      "@id": "urn:solid-server:default:HtmlControlHandler",
+      "@type": "ControlHandler",
+      "controls": [
+        {
+          "ControlHandler:_controls_key": "templateName",
+          "ControlHandler:_controls_value": {
+            "@type": "ControlHandler",
+            "controls": [
+              {
+                "ControlHandler:_controls_key": "login",
+                "ControlHandler:_controls_value": {
+                  "@id": "urn:my-template-name:default:TemplateNameRoute"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@id": "urn:solid-server:default:HtmlViewHandler",
+      "@type": "HtmlViewHandler",
+      "templates": [
+        {
+          "@id": "urn:my-template-name:default:TemplateNameHtml",
+          "@type": "HtmlViewEntry",
+          "filePath": "templates/identity/template-name/login.html.ejs",
+          "route": {
+            "@id": "urn:my-template-name:default:TemplateNameRoute"
+          }
+        }
+      ]
+    }
+  ]
+}

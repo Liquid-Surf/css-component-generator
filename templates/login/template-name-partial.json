@@ -1,0 +1,17 @@
+{
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/template-name-module/^7.0.0/components/context.jsonld"
+  ],
+  "import": [
+    "template-name:config/template-name.json"
+  ],
+  "@graph": [
+    {
+      "comment": [
+        "Add a /template-name endpoint to CSS",
+        "This configuration needs to be combined with a default CSS configuration to be functional."
+      ]
+    }
+  ]
+}
