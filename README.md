@@ -35,7 +35,7 @@ The tool will prompt you for:
 ## Available Templates
 
 - `endpoint-middleware`: A template for creating endpoint middleware components
-- `login`: A template for creating login components
+- `login`: A template for creating a new login method
 - `basic`: print 'hello world' in the log
 
 ## Adding a new template 
